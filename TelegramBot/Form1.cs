@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TL;
+using WTelegram;
 
 namespace TelegramBot
 {
@@ -181,12 +182,13 @@ namespace TelegramBot
                     continue;
 
                 if (peer is User || obj_string.IndexOf('@') == 0 || obj_string.IndexOf("telegram") == 0) continue;
+                
 
-                var chat = await _client.GetFullChat((InputPeer)peer);
+                var chat = await _client.GetFullChat(peer.ToInputPeer());
 
                 if (obj_string.IndexOf("channel") == 0)
                 {
-                    listBoxChannel.Items.Add(((ChatBase)peer).Title + "(" + chat.users.Count + ")");
+                    listBoxChannel.Items.Add(((ChatBase)peer).Title + "(" + chat.users.Count+ ")");
                     comboBoxChannel.Items.Add(((ChatBase)peer).Title + "(" + chat.users.Count + ")");
                 }
                 else
