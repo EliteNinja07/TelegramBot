@@ -231,7 +231,7 @@ namespace TelegramBot
             this.menu3,
             this.saveUsersInGroupchannelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 114);
             // 
             // menu1
             // 
@@ -258,7 +258,7 @@ namespace TelegramBot
             // 
             this.saveUsersInGroupchannelToolStripMenuItem.Name = "saveUsersInGroupchannelToolStripMenuItem";
             this.saveUsersInGroupchannelToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.saveUsersInGroupchannelToolStripMenuItem.Text = "Save users in group/channel";
+            this.saveUsersInGroupchannelToolStripMenuItem.Text = "Save users in group/channel to";
             this.saveUsersInGroupchannelToolStripMenuItem.Click += new System.EventHandler(this.saveUsersInGroupchannelToolStripMenuItem_Click);
             // 
             // tabControl1

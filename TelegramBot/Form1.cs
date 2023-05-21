@@ -167,9 +167,13 @@ namespace TelegramBot
             textBoxSearchMember.Text = "";
 
             var dialogs = await _client.Messages_GetAllDialogs();
-            foreach (Dialog dialog in dialogs.dialogs)
+            
+            for(int i = 0; i < dialogs.dialogs.Length; i ++)
             {
+                Dialog dialog = (Dialog)dialogs.dialogs[i];
+                m_statusProcess.Value = (int)((i + 1) * 100.0 / dialogs.dialogs.Length);
                 var peer = dialogs.UserOrChat(dialog);
+                
                 string obj_string;
                 if (peer.ToString() != null)
                     obj_string = peer.ToString()?.ToLower();
@@ -178,15 +182,17 @@ namespace TelegramBot
 
                 if (peer is User || obj_string.IndexOf('@') == 0 || obj_string.IndexOf("telegram") == 0) continue;
 
+                var chat = await _client.GetFullChat((InputPeer)peer);
+
                 if (obj_string.IndexOf("channel") == 0)
                 {
-                    listBoxChannel.Items.Add(((ChatBase)peer).Title);
-                    comboBoxChannel.Items.Add(((ChatBase)peer).Title);
+                    listBoxChannel.Items.Add(((ChatBase)peer).Title + "(" + chat.users.Count + ")");
+                    comboBoxChannel.Items.Add(((ChatBase)peer).Title + "(" + chat.users.Count + ")");
                 }
                 else
                 {
-                    listBoxGroup.Items.Add(((ChatBase)peer).Title);
-                    comboBoxGroup.Items.Add(((ChatBase)peer).Title);
+                    listBoxGroup.Items.Add(((ChatBase)peer).Title + "(" + chat.users.Count + ")");
+                    comboBoxGroup.Items.Add(((ChatBase)peer).Title + "(" + chat.users.Count + ")");
                 }
             }
 
@@ -547,13 +553,17 @@ namespace TelegramBot
                 }
             }
 
+            buttonStartFileAdd.Text = "Stop Adding";
             PercentForm m_percentForm = new PercentForm();
-            m_percentForm.Show();
-
+            m_percentForm.ShowDialog(this);
 
             for (int i = 0; i < listBoxFileContacts.Items.Count; i++)
             {
-                if (m_percentForm.bStop) break;
+                if (m_percentForm.bStop)
+                {
+                    buttonStartFileAdd.Text = "Start Adding";
+                    break;
+                }
 
                 string user_text = listBoxFileContacts.Items[i].ToString();
                 AppendLogText($"Adding user {user_text} : {DateTime.Now} \r\n\r\n");
@@ -980,7 +990,20 @@ namespace TelegramBot
 
         private void saveUsersInGroupchannelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = saveFileDialog.FileName;
+                using(StreamWriter writer = new StreamWriter(fileName))
+                {
+                    int cntMember = listBoxMember.Items.Count;
+                    for(int i = 0; i < cntMember; i++)
+                    {
+                        writer.WriteLine(listBoxMember.Items[i].ToString());
+                    }
+                }
+            }
         }
     }
 }
