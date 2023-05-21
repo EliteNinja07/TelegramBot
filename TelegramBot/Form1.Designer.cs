@@ -46,6 +46,7 @@ namespace TelegramBot
             this.menu1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveUsersInGroupchannelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
@@ -88,6 +89,8 @@ namespace TelegramBot
             this.radioButtonUser = new System.Windows.Forms.RadioButton();
             this.textBoxAddUser = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.m_statusBar = new System.Windows.Forms.StatusStrip();
+            this.m_statusProcess = new System.Windows.Forms.ToolStripProgressBar();
             this.checkBoxDontAppend = new System.Windows.Forms.CheckBox();
             this.buttonStartFileAdd = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
@@ -109,6 +112,7 @@ namespace TelegramBot
             this.tabPage5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.m_statusBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -224,9 +228,10 @@ namespace TelegramBot
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu1,
             this.menu2,
-            this.menu3});
+            this.menu3,
+            this.saveUsersInGroupchannelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 92);
             // 
             // menu1
             // 
@@ -248,6 +253,13 @@ namespace TelegramBot
             this.menu3.Size = new System.Drawing.Size(243, 22);
             this.menu3.Text = "Save all memers from all groups";
             this.menu3.Click += new System.EventHandler(this.menu3_ClickAsync);
+            // 
+            // saveUsersInGroupchannelToolStripMenuItem
+            // 
+            this.saveUsersInGroupchannelToolStripMenuItem.Name = "saveUsersInGroupchannelToolStripMenuItem";
+            this.saveUsersInGroupchannelToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.saveUsersInGroupchannelToolStripMenuItem.Text = "Save users in group/channel";
+            this.saveUsersInGroupchannelToolStripMenuItem.Click += new System.EventHandler(this.saveUsersInGroupchannelToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -649,6 +661,7 @@ namespace TelegramBot
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.m_statusBar);
             this.groupBox2.Controls.Add(this.checkBoxDontAppend);
             this.groupBox2.Controls.Add(this.buttonStartFileAdd);
             this.groupBox2.Controls.Add(this.label18);
@@ -667,6 +680,21 @@ namespace TelegramBot
             this.groupBox2.TabIndex = 50;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Add contacts from file";
+            // 
+            // m_statusBar
+            // 
+            this.m_statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.m_statusProcess});
+            this.m_statusBar.Location = new System.Drawing.Point(3, 218);
+            this.m_statusBar.Name = "m_statusBar";
+            this.m_statusBar.Size = new System.Drawing.Size(496, 22);
+            this.m_statusBar.TabIndex = 61;
+            this.m_statusBar.Text = "Loading contacts";
+            // 
+            // m_statusProcess
+            // 
+            this.m_statusProcess.Name = "m_statusProcess";
+            this.m_statusProcess.Size = new System.Drawing.Size(100, 16);
             // 
             // checkBoxDontAppend
             // 
@@ -729,9 +757,9 @@ namespace TelegramBot
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(11, 23);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(109, 13);
+            this.label15.Size = new System.Drawing.Size(100, 13);
             this.label15.TabIndex = 51;
-            this.label15.Text = "total contacts loaded:";
+            this.label15.Text = "total targets loaded:";
             // 
             // listBoxFileContacts
             // 
@@ -830,6 +858,8 @@ namespace TelegramBot
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.m_statusBar.ResumeLayout(false);
+            this.m_statusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -907,6 +937,9 @@ namespace TelegramBot
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button buttonStartFileAdd;
         private System.Windows.Forms.CheckBox checkBoxDontAppend;
+        private System.Windows.Forms.ToolStripMenuItem saveUsersInGroupchannelToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip m_statusBar;
+        private System.Windows.Forms.ToolStripProgressBar m_statusProcess;
     }
 }
 

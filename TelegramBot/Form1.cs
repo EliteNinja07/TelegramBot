@@ -976,5 +976,11 @@ namespace TelegramBot
 
             if (!bExist) listBoxMember.SelectedIndex = -1;
         }
+
+
+        private void saveUsersInGroupchannelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
